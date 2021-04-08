@@ -54,6 +54,7 @@ public class activity_login extends AppCompatActivity {
         String password = "Hermes";
     }
     public void openActivityLogin() {
+        //replaced newUserActivty with MessageActivity
         Intent intent = new Intent(this, NewUserActivity.class);
         startActivity(intent);
     }
