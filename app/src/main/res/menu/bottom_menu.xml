@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home"
+        android:title="Home"/>
+
+    <item android:id="@+id/nav_search"
+        android:title="Search Connections"/>
+
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/phone_logo"
+        android:title="Write a Message" />
+
+    <item android:id="@+id/nav_heart"
+        android:title="Saved Messages"/>
+
+    <item android:id="@+id/nav_profile"
+        android:title="Profile"/>
+</menu>

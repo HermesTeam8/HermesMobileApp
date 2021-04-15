@@ -23,7 +23,7 @@ public class NewUserActivity extends AppCompatActivity {
         });
     }
     public void openActivityLogin() {
-        Intent intent = new Intent(this, activity_login.class);
+        Intent intent = new Intent(this, StartActivity.class);
         startActivity(intent);
     }
 }

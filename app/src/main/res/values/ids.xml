@@ -4,4 +4,10 @@
     <item name="nav_connections" type="id" />
     <item name="nav_settings" type="id" />
     <item name="nav_messages" type="id" />
+    <item name="bottom_navigation" type="id" />
+    <item name="nav_search" type="id" />
+    <item name="nav_add" type="id" />
+    <item name="nav_joined" type="id" />
+    <item name="nav_profile" type="id" />
+    <item name="fragment_container" type="id" />
 </resources>
