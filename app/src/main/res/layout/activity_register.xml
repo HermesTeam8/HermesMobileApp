@@ -5,7 +5,7 @@
     android:id="@+id/backButton"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewUserActivity">
+    tools:context=".RegisterActivity">
 
     <Button
         android:id="@+id/back"
@@ -73,7 +73,6 @@
         android:layout_width="368dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.558"
@@ -86,7 +85,7 @@
         android:layout_width="362dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textWebEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
@@ -206,4 +205,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.818"
         app:srcCompat="@drawable/twitter_logo" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginEnd="171dp"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

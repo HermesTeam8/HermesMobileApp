@@ -16,9 +16,9 @@
         <activity android:name=".ManageService" />
         <activity android:name=".selectService" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".NewUserActivity" />
-        <activity android:name=".StartActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".StartHere">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

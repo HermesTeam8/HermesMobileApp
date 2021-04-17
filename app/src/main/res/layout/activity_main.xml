@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E88E5"
-    tools:context=".MainActivity">
+    tools:context=".StartHere">
 
 
     <RelativeLayout
@@ -16,9 +16,6 @@
         <include
             android:id="@+id/main_page_toolbar"
             layout="@layout/app_bar_layout">
-
-
-
         </include>
 
         <FrameLayout
@@ -51,7 +48,4 @@
 
         </FrameLayout>
     </RelativeLayout>
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

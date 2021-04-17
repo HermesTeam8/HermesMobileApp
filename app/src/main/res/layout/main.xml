@@ -6,6 +6,8 @@
     android:backgroundTint="#00B8D4">
     tools:context=".MainActivity">
 
+
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

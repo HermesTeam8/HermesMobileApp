@@ -2,156 +2,182 @@ package com.example.hermes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hermes.Fragments.HomeFragment;
-import com.example.hermes.Fragments.NotificationFragment;
-import com.example.hermes.Fragments.ProfileFragment;
-import com.example.hermes.Fragments.SearchFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private ImageView logo;
+    private ListView listView;
 
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    private RecyclerView messageList;
-    private Toolbar mToolbar;
+    private Button logout, savetoDatabase;
+    private EditText edit;
 
-    private BottomNavigationView bottomNavigationView;
-    private Fragment selectorFragment;
+//    private Button newUserButton, registerBtn, loginBtn;
+//    private EditText userName;
+////  boolean isValid = false;
+//    private EditText userPassword;
+//    private String password = "";
+//    private String username = "";
+//
 
-    //private Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
 
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.main);
-
-            bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                    switch (menuItem.getItemId()){
-                        case R.id.nav_home :
-                            Toast.makeText(MainActivity.this,"HOME",Toast.LENGTH_SHORT).show();
-                            selectorFragment = new HomeFragment();
-                            break;
-
-                        case R.id.nav_search :
-                            Toast.makeText(MainActivity.this, "Search Connections",Toast.LENGTH_SHORT).show();
-                            selectorFragment = new SearchFragment();
-                            break;
-
-                        case R.id.nav_add :
-                            selectorFragment = null;
-                            startActivity(new Intent(MainActivity.this , PostActivity.class));
-                            break;
-
-                        case R.id.nav_messages:
-                            selectorFragment = new NotificationFragment();
-                            break;
-
-                        case R.id.nav_profile :
-                            selectorFragment = new ProfileFragment();
-                            break;
-                    }
-
-                    if (selectorFragment != null){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , selectorFragment).commit();
-                    }
-
-                    return  true;
-
-                }
-            });
-
-            Bundle intent = getIntent().getExtras();
-            if (intent != null) {
-                String profileId = intent.getString("publisherId");
-
-                getSharedPreferences("PROFILE", MODE_PRIVATE).edit().putString("profileId", profileId).apply();
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-                bottomNavigationView.setSelectedItemId(R.id.nav_profile);
-            } else {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , new HomeFragment()).commit();
+        logout = findViewById(R.id.logout);
+        edit = findViewById(R.id.editTextMessage);
+        savetoDatabase = findViewById(R.id.button5);
+        listView = findViewById(R.id.linear_layout2);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, StartHere.class));
             }
-        }
-
-//        navigationView = (NavigationView)   findViewById(R.id.navigation_view);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//
-//        View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
-//        mToolbar = (Toolbar) navigationView.findViewById(R.id.main_app_bar);
-//        //setSupportActionBar(mToolbar);
-//        // getSupportActionBar().setTitle("HOME PAGE");
-//        //mToolbar.setTitle("HOMEPAGE!!");
-//        drawerLayout = (DrawerLayout)   navigationView.findViewById(R.id.drawable_layout);
-//        actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open,R.string.drawer__close);
-//        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-//        actionBarDrawerToggle.syncState();
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                UserMenuSelector(item);
-//                return false;
-//            }
-//
-//
 //        });
+//        linearLayout = findViewById(R.id.linear_layout);
+//        registerBtn = findViewById(R.id.registerButton);
+//        loginBtn = findViewById(R.id.loginButton);
+//
+//        registerBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, RegisterActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+//                        Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//            }
+//        });
+//
+//        loginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, LoginActivity.class)
+//                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//            }
+//        });
+//    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+//            startActivity(new Intent(MainActivity.this, StartHere.class));
+//            finish();
+//        }
+//    }
+        });
 
-//        login = (Button) findViewById(R.id.login);
-//        login.setOnClickListener(new View.OnClickListener() {
+        savetoDatabase.setOnClickListener(new View.OnClickListener() {
+             @Override
+                public void onClick(View v) {
+                    String txt_Message = edit.getText().toString();
+                    if (txt_Message.isEmpty()) {
+                        Toast.makeText(MainActivity.this, "no message entered", Toast.LENGTH_SHORT).show();
+                    } else {
+                        FirebaseDatabase.getInstance().getReference().child("Messages").push().child("sentMessages").setValue(txt_Message);
+                    }
+                }
+        });
+
+        final ArrayList<String> list = new ArrayList<>();
+        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.list_item, list);
+        listView.setAdapter(adapter);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Messages");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                    list.add(snapshot1.getValue().toString());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+}
+                //created database with branch called Social apps, and value set to abcd
+                // FirebaseDatabase.getInstance().getReference().child("SocialApps").child("Messages").setValue("abcd");
+//                HashMap < String, Object > map = new HashMap<>();
+//        map.put("Name", "Billy");
+//        map.put("Email", "sample2@gmail.com");
+//
+//        FirebaseDatabase.getInstance().getReference().child("SocialApps").child("usersTesting").updateChildren(map);
+//
+//    }
+//}
+
+
+//        newUserButton = (Button) findViewById(R.id.newUserButton);
+//        userName = (EditText) findViewById(R.id.userName);
+//        userPassword = (EditText) findViewById(R.id.userPassword);
+//        loginButton = (Button) findViewById(R.id.loginButton);
+//        newUserButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                openActivityLogin();
 //            }
 //        });
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if(actionBarDrawerToggle.onOptionsItemSelected(item)) {
-//            return true;
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                username = userName.getText().toString();
+//                password = userPassword.getText().toString();
+//                if(username.isEmpty() || password.isEmpty()){
+//                    Toast.makeText(StartActivity.this, "Please enter username and password", Toast.LENGTH_LONG).show();
+//                }else {
+//                    isValid = validate(username, password);
+//                    if (!isValid) {
+//                    Toast.makeText(StartActivity.this, "Incorrect username or password", Toast.LENGTH_LONG).show();
+//                }
+//                else {
+//                    startActivity(new Intent(StartActivity.this, MessageActivity.class));
+//                }}
+//            }});
 //        }
-//        return super.onOptionsItemSelected(item);
-//    }
+
 //
-//    private void UserMenuSelector(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.nav_home:
-//                Toast.makeText(this,"HOME", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.nav_connections:
-//                Toast.makeText(this,"Connections", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.nav_messages:
-//                Toast.makeText(this,"Messages", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.nav_settings:
-//                Toast.makeText(this,"Settings", Toast.LENGTH_SHORT).show();
-//                break;
-//        }
+//
+//    class Credentials {
+//        String name = "UM8";
+//        String password = "Hermes";
 //    }
+//    public void openActivityLogin() {
+//        //replaced newUserActivty with MessageActivity
+//        Intent intent = new Intent(this, NewUserActivity.class);
+//        startActivity(intent);
+//    }
+//        private boolean validate(String username, String password){
+//            Credentials credentials = new Credentials();
+//            if(username.equals(credentials.name) && password.equals(credentials.password)) {
+//                return true;
+//            }
+//            return false;
+//        }
+//}
 
-    public void openActivityLogin() {
-        Intent intent = new Intent(this, StartActivity.class);
-        startActivity(intent);
-    }
-}
