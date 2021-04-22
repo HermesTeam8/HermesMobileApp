@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class StartHere extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class StartHere extends AppCompatActivity {
 
 
         register = findViewById(R.id.registerButton);
-        login= findViewById(R.id.loginButton);
+        login = findViewById(R.id.loginButton);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +53,22 @@ public class StartHere extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(StartHere.this, LoginActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(new Intent(StartHere.this , MainActivity.class));
+            finish();
+        }
+    }
+}
+
 //            bottomNavigationView = findViewById(R.id.bottom_navigation);
 //
 //            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -171,9 +184,3 @@ public class StartHere extends AppCompatActivity {
 //                break;
 //        }
 //    }
-
-    public void openActivityLogin() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-}
