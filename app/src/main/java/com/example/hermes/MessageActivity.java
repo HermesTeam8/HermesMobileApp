@@ -16,12 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+//NOT IN USE CURRENTLY. USING AS A REFERENCE TO SEE HOW MESSAGES ARE BEING SENT TO FIREBASE
 public class MessageActivity extends AppCompatActivity {
-
 
     private  EditText editMessage;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private Button continueBtn; //= findViewById(R.id.button);
+    private Button continueBtn;
     private String TAG = "SENT: ";
 
     @Override
@@ -30,8 +30,6 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
 
         editMessage = (EditText) findViewById(R.id.editMessage);
-
-
         continueBtn = (Button) findViewById(R.id.button);
 
         String message = editMessage.getText().toString();

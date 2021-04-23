@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class StartHere extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -34,7 +34,7 @@ public class StartHere extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activty_starthere);
+        setContentView(R.layout.activity_start);
 
 
         register = findViewById(R.id.registerButton);
@@ -43,7 +43,7 @@ public class StartHere extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartHere.this, RegisterActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                startActivity(new Intent(StartActivity.this, RegisterActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
@@ -51,7 +51,7 @@ public class StartHere extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartHere.this, LoginActivity.class)
+                startActivity(new Intent(StartActivity.this, LoginActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
@@ -61,9 +61,8 @@ public class StartHere extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(StartHere.this , MainActivity.class));
+            startActivity(new Intent(StartActivity.this , MainActivity.class));
             finish();
         }
     }

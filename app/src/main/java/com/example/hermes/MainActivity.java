@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,17 +22,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView logo;
     private ListView listView;
-
     private Button logout, savetoDatabase;
     private EditText edit;
-
     private DatabaseReference mRootRef;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, StartHere.class));
+                startActivity(new Intent(MainActivity.this, StartActivity.class));
             }
 //        });
 //        linearLayout = findViewById(R.id.linear_layout);
@@ -92,9 +91,18 @@ public class MainActivity extends AppCompatActivity {
                  if (txt_Message.isEmpty()) {
                      Toast.makeText(MainActivity.this, "no message entered", Toast.LENGTH_SHORT).show();
                  } else {
-                     FirebaseDatabase.getInstance().getReference().child("Messages").push().child("sentMessages").setValue(txt_Message);
+
+                     HashMap<String, Object> messageBox = new HashMap<>();
+                     messageBox.put("sent", txt_Message);
+
+                     mRootRef.child("Messages").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(messageBox).addOnSuccessListener(new OnSuccessListener<Void>() {
+                         @Override
+                         public void onSuccess(Void aVoid) {
+                             Toast.makeText(MainActivity.this, "message sent!",Toast.LENGTH_SHORT).show();
+                         }
+                     });
                  }
-                }
+             }
         });
 
         final ArrayList<String> list = new ArrayList<>();
@@ -113,10 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
