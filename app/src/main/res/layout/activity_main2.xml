@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/writeMessageLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scrollviewss">
+    tools:context=".MainActivity">
 
+    <ListView
+        android:id="@+id/linear_layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="94dp" />
 
     <ScrollView
         android:id="@+id/scrollviewFriends"
-        android:layout_width="318dp"
-        android:layout_height="220dp"
+        android:layout_width="235dp"
+        android:layout_height="144dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="66dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="106dp"
         android:padding="40dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <CheckBox
-                android:id="@+id/checkBox13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Friend 1" />
 
             <CheckBox
                 android:id="@+id/checkBox12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Friend 2" />
+
+            <CheckBox
+                android:id="@+id/checkBox13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Friend 1" />
 
             <CheckBox
                 android:id="@+id/checkBox9"
@@ -48,8 +57,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Friend 6" />
-
-
         </LinearLayout>
     </ScrollView>
 
@@ -72,5 +79,17 @@
         android:layout_marginTop="165dp"
         android:layout_marginBottom="16dp"
         android:text="Save to database" />
+
+
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG OUT"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/button5"/>
+
+
 
 </RelativeLayout>
