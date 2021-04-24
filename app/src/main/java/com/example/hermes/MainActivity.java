@@ -1,14 +1,17 @@
 package com.example.hermes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edit;
     private DatabaseReference mRootRef;
     private FirebaseAuth mAuth;
+    private CheckBox checkBox1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         edit = findViewById(R.id.editTextMessage);
         savetoDatabase = findViewById(R.id.button5);
         listView = findViewById(R.id.linear_layout2);
+        checkBox1 = findViewById(R.id.checkBox12);
+        checkBox1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertDialog();
+            }
+        });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +111,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showAlertDialog() {AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("where do you want to send to?");
+        String[] items = {"email", "phone number", "Facebook", "Discord", "Twitter"};
+        boolean[] checkedItems = {false, false, false, false, false};
+        alertDialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        switch (which) {
+                            case 0:
+                                if (isChecked)
+                                    Toast.makeText(MainActivity.this, "-->email", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 1:
+                                if (isChecked)
+                                    Toast.makeText(MainActivity.this, "-->phone number", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 2:
+                                if (isChecked)
+                                    Toast.makeText(MainActivity.this, "-->Facebook", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 3:
+                                if (isChecked)
+                                    Toast.makeText(MainActivity.this, "-->Discord", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 4:
+                                if (isChecked)
+                                    Toast.makeText(MainActivity.this, "-->Twitter", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+        AlertDialog alertDialog1 = alertDialog.create();
+        alertDialog1.setCanceledOnTouchOutside(true);
+        alertDialog1.show();
+    }
 }
+
+
 /*
     This will print out sent messages that belong to user
 
