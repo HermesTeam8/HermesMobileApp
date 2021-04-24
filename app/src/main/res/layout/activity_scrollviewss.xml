@@ -28,26 +28,26 @@
                 android:id="@+id/checkBox13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 1" />
+                android:text="Peter Parker" />
 
             <CheckBox
                 android:id="@+id/checkBox12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 2" />
+                android:text="Bruce Wayne" />
 
             <CheckBox
                 android:id="@+id/checkBox9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 3" />
+                android:text="Clark Kent" />
 
 
             <CheckBox
                 android:id="@+id/checkBox7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 6" />
+                android:text="Natasha Romanoff" />
 
 
         </LinearLayout>
@@ -71,6 +71,6 @@
         android:layout_marginStart="128dp"
         android:layout_marginTop="165dp"
         android:layout_marginBottom="16dp"
-        android:text="Save to database" />
+        android:text="Send message" />
 
 </RelativeLayout>

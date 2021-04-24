@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6F82B1FF"
+    android:contextClickable="false"
     tools:context=".MainActivity">
 
     <ListView
@@ -16,79 +17,108 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="94dp" />
 
+
     <ScrollView
         android:id="@+id/scrollviewFriends"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="106dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:padding="40dp">
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="4dp"
+        android:background="#FF80AB"
+        android:backgroundTint="#82B1FF"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#80D8FF"
+            android:backgroundTint="#DAA9D7EC"
             android:orientation="vertical">
+
 
             <CheckBox
                 android:id="@+id/checkBox12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 1" />
+                android:text="Peter Parker" />
 
             <CheckBox
                 android:id="@+id/checkBox13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 2" />
+                android:text="Natasha Romanoff" />
 
             <CheckBox
                 android:id="@+id/checkBox9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 3" />
-
+                android:text="Steven Rogers" />
 
             <CheckBox
                 android:id="@+id/checkBox7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Friend 4" />
+                android:text="Anthony Stark" />
         </LinearLayout>
     </ScrollView>
 
     <EditText
         android:id="@+id/editTextMessage"
-        android:layout_width="217dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
         android:layout_below="@id/scrollviewFriends"
-        android:layout_marginTop="30dp"
         android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
         android:background="#F2FFFFFF"
+        android:drawableLeft="@android:drawable/ic_menu_edit"
         android:hint="write your message here" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scrollviewFriends"
-        android:layout_alignParentStart="true"
+        android:layout_below="@id/editTextMessage"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="165dp"
-        android:layout_marginBottom="16dp"
-        android:text="Save to database" />
-
+        android:layout_marginTop="75dp"
+        android:backgroundTint="#659C25"
+        android:text="Send Message" />
 
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button5"
-        android:layout_centerInParent="true"
-        android:text="LOG OUT" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:backgroundTint="#FF9E80"
+        android:text="LOG OUT"
+        android:textColor="#D51A1A" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="133dp"
+        android:text="Friends" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="149dp"
+        android:layout_height="123dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="294dp"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/ic_action_name"
+        app:tint="#151514" />
 
 
 </RelativeLayout>

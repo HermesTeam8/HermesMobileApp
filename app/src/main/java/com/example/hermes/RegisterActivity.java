@@ -23,15 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
+
     private Button back;
-
-    //may have to change id of this register button so it is not same as StartActivity registerButton
-    private EditText email, password, username;
+    private EditText email, password, username, phoneNum;
     private Button login, register;
-
     private DatabaseReference mRootRef;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextTextPersonName2);
         username = findViewById(R.id.username);
         register = findViewById(R.id.registerButton);
-
+        phoneNum = findViewById(R.id.editPhone);
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,18 +49,19 @@ public class RegisterActivity extends AppCompatActivity {
                 String txtEmail = email.getText().toString();
                 String txtPassword = password.getText().toString();
                 String txtUsername = username.getText().toString();
+                String txtPhoneNum = phoneNum.getText().toString();
                 if (TextUtils.isEmpty(txtEmail) || TextUtils.isEmpty(txtPassword) || TextUtils.isEmpty(txtUsername)) {
                     Toast.makeText(RegisterActivity.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
                 } else if (txtPassword.length() < 6) {
                     Toast.makeText(RegisterActivity.this, "Password too short!", Toast.LENGTH_SHORT).show();
                 } else {
-                    registerUser(txtEmail, txtPassword, txtUsername);
+                    registerUser(txtEmail, txtPassword, txtUsername, txtPhoneNum);
                 }
             }
         });
     }
 
-    private void registerUser(final String email, String password, final String username) {
+    private void registerUser(final String email, String password, final String username, final String phoneNum) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
@@ -72,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("email", email);
                 map.put("username", username);
+                map.put("phone number", phoneNum);
                 map.put("id", mAuth.getCurrentUser().getUid());
 
                 mRootRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
